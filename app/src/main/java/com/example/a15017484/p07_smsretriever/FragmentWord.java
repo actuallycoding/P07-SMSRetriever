@@ -89,8 +89,10 @@ public class FragmentWord extends Fragment {
                     filterArgs[i] = "%" + splitStr[i] + "%";
                     Log.d("test", splitStr[i]);
                 }
+                //if find smses that contain any of the words, change "AND" to "OR".
+                //"AND" is to find smses that contain all the words.
                 for (int x = 0; x < count - 1; x++) {
-                    filter += "OR body LIKE ? ";
+                    filter += "AND body LIKE ? ";
                 }
 
                 Log.d("filter", filter);

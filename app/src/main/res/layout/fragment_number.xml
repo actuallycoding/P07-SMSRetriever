@@ -21,11 +21,25 @@
         android:ems="10"
         android:inputType="phone" />
 
-    <Button
-        android:id="@+id/btnRetrieve1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retrieve SMS" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnRetrieve1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Retrieve SMS" />
+
+        <Button
+            android:id="@+id/btnEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Send Email" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvSMS1"
