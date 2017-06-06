@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.PermissionChecker;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,13 +71,29 @@ public class FragmentWord extends Fragment {
                 ContentResolver cr = getActivity().getContentResolver();
                 // Fetch SMS Message from Built-in Content Provider
                 // The filter String
-                String filter = "body LIKE ? ";
+
+
                 // The matches for the ?
                 String word = etWord.getText().toString();
                 if (word.isEmpty()) {
                     return;
                 }
-                String[] filterArgs = {"%" + word + "%"};
+                Log.d("word", word);
+                String[] splitStr = word.split("\\s+");
+                //"\\s" is a regular expression for white space characters and  "+" is for any string that contains it as split only takes in regular expressions.
+                Log.d("check", splitStr[0]);
+                int count = splitStr.length;
+                String[] filterArgs = new String[count];
+                String filter = "body LIKE ? ";
+                for (int i = 0; i < count; i++) {
+                    filterArgs[i] = "%" + splitStr[i] + "%";
+                    Log.d("test", splitStr[i]);
+                }
+                for (int x = 0; x < count - 1; x++) {
+                    filter += "OR body LIKE ? ";
+                }
+
+                Log.d("filter", filter);
                 // Fetch SMS Message from Built-in Content Provider
 
                 Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
