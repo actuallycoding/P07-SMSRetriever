@@ -70,8 +70,11 @@ public class FragmentNumber extends Fragment {
                 // The filter String
                 String filter = "address LIKE ? ";
                 // The matches for the ?
-                String number = "%" + etNumber.getText().toString() + "%";
-                String[] filterArgs = {number};
+                String number = etNumber.getText().toString();
+                if (number.isEmpty()) {
+                    return;
+                }
+                String[] filterArgs = {"%" + number + "%"};
                 // Fetch SMS Message from Built-in Content Provider
 
                 Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);

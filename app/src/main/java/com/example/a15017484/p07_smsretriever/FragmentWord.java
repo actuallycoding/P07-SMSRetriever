@@ -72,8 +72,11 @@ public class FragmentWord extends Fragment {
                 // The filter String
                 String filter = "body LIKE ? ";
                 // The matches for the ?
-                String word = "%" + etWord.getText().toString() + "%";
-                String[] filterArgs = {word};
+                String word = etWord.getText().toString();
+                if (word.isEmpty()) {
+                    return;
+                }
+                String[] filterArgs = {"%" + word + "%"};
                 // Fetch SMS Message from Built-in Content Provider
 
                 Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
