@@ -3,6 +3,7 @@ package com.example.a15017484.p07_smsretriever;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.a15017484.p07_smsretriever.R.id.etNumber;
 
@@ -124,6 +126,28 @@ public class FragmentWord extends Fragment {
         });
 
         return view;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+
+        switch (requestCode) {
+            case 0: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the read SMS
+                    //  as if the btnRetrieve is clicked
+                    btnRetrieve.performClick();
+
+                } else {
+                    // permission denied... notify user
+                    Toast.makeText(getActivity(), "Permission not granted",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
 }
